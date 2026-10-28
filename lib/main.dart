@@ -1,182 +1,57 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: LayoutRulesExample(),
-  ));
+  runApp(const MyApp());
 }
 
-class LayoutRulesExample extends StatelessWidget {
-  const LayoutRulesExample({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ProfilePage(),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tiga Aturan Layout Flutter'),
+        title: const Text(
+          'Profil Pengguna',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true, 
+        backgroundColor: Colors.blue,
       ),
-      body: MyPages1(),
-   );
- }
-}
-
-class MyPages1 extends StatelessWidget {
-  const MyPages1({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '1 & 2. Aturan Constraints (Batas) dan Size (Ukuran)',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text('Induk memaksa anak berada di batas 100x100 hingga 200x200. Anak meminta ukuran 500x50, tapi dipaksa mengikuti batas induk (mentok di lebar 200, tinggi 100).'),
-              const SizedBox(height: 10),
-              
-              // CONTOH ATURAN 1 & 2
-              ConstrainedBox(
-                // INDUK memberikan constraints ke bawah (Constraints turun)
-                constraints: const BoxConstraints(
-                  minWidth: 100,
-                  maxWidth: 200,
-                  minHeight: 100,
-                  maxHeight: 200,
-                ),
-                // ANAK mencoba menentukan ukuran (Ukuran naik)
-                child: Container(
-                  width: 500, // Mencoba lebih besar dari maxWidth (Gagal, dipaksa 200)
-                  height: 50, // Mencoba lebih kecil dari minHeight (Gagal, dipaksa 100)
-                  color: Colors.blue,
-                  child: const Text(
-                    'Saya minta 500x50, tapi dapatnya 200x100',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          ),
+      body: Center(
+        child: Column(
+          children: const [
+            SizedBox(height: 20),
+            CircleAvatar(
+              radius: 40,
+              backgroundColor: Colors.grey,
+              child: Icon(Icons.person, size: 50, color: Colors.white),
+            ),
+            SizedBox(height: 12),
+            Text(
+              'Safrizal Ramadhan',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 4),
+            Text(
+              'Mahasiswa',
+              style: TextStyle(color: Colors.grey),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
-
-class MyPages2 extends StatelessWidget {
-  const MyPages2({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-             // const Divider(height: 40, thickness: 2),
-
-              const Text(
-                '3. Aturan Posisi (dengan Center)',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text('Induk abu-abu berukuran 200x200. Kotak merah 80x80 tidak bisa menaruh dirinya di tengah, jadi kita gunakan widget Center.'),
-              const SizedBox(height: 10),
-
-              // CONTOH ATURAN 3 (CENTER)
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.grey[300], // Induk yang memiliki ruang
-                // Induk yang menentukan posisi
-                child: Center( 
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    color: Colors.red,
-                    child: const Text('Center', style: TextStyle(color: Colors.white)),
-                  ),
-                ),
-              ),
-
-              const Divider(height: 40, thickness: 2),
-
-              const Text(
-                '3. Aturan Posisi (dengan Align)',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text('Induk abu-abu berukuran 200x200. Kotak hijau 80x80 ditempatkan di pojok kanan bawah menggunakan widget Align.'),
-              const SizedBox(height: 10),
-
-              // CONTOH ATURAN 3 (ALIGN)
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.grey[300], // Induk yang memiliki ruang
-                // Induk yang menentukan posisi
-                child: Align(
-                  alignment: Alignment.bottomRight, 
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    color: Colors.green,
-                    child: const Text('Align', style: TextStyle(color: Colors.white)),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-  }
-}
-
-class MyPages3 extends StatelessWidget {
-  const MyPages3({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '3. Aturan Posisi (dengan Align)',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text('Induk abu-abu berukuran 200x200. Kotak hijau 80x80 ditempatkan di pojok kanan bawah menggunakan widget Align.'),
-              const SizedBox(height: 10),
-
-              // CONTOH ATURAN 3 (ALIGN)
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.grey[300], // Induk yang memiliki ruang
-                // Induk yang menentukan posisi
-                child: Align(
-                  alignment: Alignment.bottomRight, 
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    color: Colors.green,
-                    child: const Text('Align', style: TextStyle(color: Colors.white)),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-  }
-}
-
-
-
