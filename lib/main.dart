@@ -45,55 +45,7 @@ class ProfilePage extends StatelessWidget {
             label: const Text('Edit Profil'),
           ),
           const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: const [
-                    Text(
-                      '7',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    Text('Proyek', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: const [
-                    Text(
-                      '120',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    Text('Followers', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: const [
-                    Text(
-                      '85',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    Text('Following', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          const ProfileStats(),
         ],
       ),
     );
@@ -134,6 +86,52 @@ class ProfileInfo extends StatelessWidget {
         Text(
           role,
           style: const TextStyle(fontSize: 14, color: Colors.grey),
+        ),
+      ],
+    );
+  }
+}
+
+class ProfileStats extends StatelessWidget {
+  const ProfileStats({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        Expanded(child: StatItem(value: '7', label: 'Proyek')),
+        Expanded(child: StatItem(value: '120', label: 'Followers')),
+        Expanded(child: StatItem(value: '85', label: 'Following')),
+      ],
+    );
+  }
+}
+
+class StatItem extends StatelessWidget {
+  final String value;
+  final String label;
+
+  const StatItem({
+    super.key,
+    required this.value,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          ),
+        ),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.grey),
         ),
       ],
     );
