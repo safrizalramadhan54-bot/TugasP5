@@ -20,6 +20,15 @@ class MyApp extends StatelessWidget {
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  static const List<String> _experiences = [
+    'Developer - GlowBelle Beauty Clinic (Java Swing)',
+    'Full-Stack Developer - Kasir UMKM (Laravel & Filament)',
+    'Web Developer - Company Profile Mitra Sarana Technindo',
+    'Developer - NPT HRD System (Java Swing)',
+    'Developer - SmartCare AI (Laravel & Groq AI)',
+    'Mobile Developer - SmartInvoice (Laravel & Flutter)',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +55,22 @@ class ProfilePage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           const ProfileStats(),
+          const SizedBox(height: 20),
+          const Text(
+            'Pengalaman Proyek',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _experiences.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: const Icon(Icons.work),
+                  title: Text(_experiences[index]),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
