@@ -32,19 +32,11 @@ class ProfilePage extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 20),
-          const CircleAvatar(
-            radius: 50,
-            backgroundColor: Colors.grey,
-            child: Icon(Icons.person, size: 50, color: Colors.white),
-          ),
+          const ProfileAvatar(),
           const SizedBox(height: 10),
-          const Text(
-            'I Ketut Gunawan, S.Kom, M.T.I.',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const Text(
-            'Senior Backend Engineer & Dosen',
-            style: TextStyle(fontSize: 14, color: Colors.grey),
+          const ProfileInfo(
+            name: ' Safrizal Ramadhan',
+            role: 'Mahasiswa',
           ),
           const SizedBox(height: 10),
           OutlinedButton.icon(
@@ -54,6 +46,46 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ProfileAvatar extends StatelessWidget {
+  const ProfileAvatar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const CircleAvatar(
+      radius: 50,
+      backgroundColor: Colors.grey,
+      child: Icon(Icons.person, size: 50, color: Colors.white),
+    );
+  }
+}
+
+class ProfileInfo extends StatelessWidget {
+  final String name;
+  final String role;
+
+  const ProfileInfo({
+    super.key,
+    required this.name,
+    required this.role,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          name,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          role,
+          style: const TextStyle(fontSize: 14, color: Colors.grey),
+        ),
+      ],
     );
   }
 }
