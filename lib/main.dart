@@ -35,7 +35,7 @@ class ProfilePage extends StatelessWidget {
           const ProfileAvatar(),
           const SizedBox(height: 10),
           const ProfileInfo(
-            name: ' Safrizal Ramadhan',
+            name: 'Safrizal Ramadhan',
             role: 'Mahasiswa',
           ),
           const SizedBox(height: 10),
@@ -43,6 +43,56 @@ class ProfilePage extends StatelessWidget {
             onPressed: () {},
             icon: const Icon(Icons.edit, size: 18),
             label: const Text('Edit Profil'),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  children: const [
+                    Text(
+                      '7',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    Text('Proyek', style: TextStyle(color: Colors.grey)),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  children: const [
+                    Text(
+                      '120',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    Text('Followers', style: TextStyle(color: Colors.grey)),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  children: const [
+                    Text(
+                      '85',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    Text('Following', style: TextStyle(color: Colors.grey)),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
