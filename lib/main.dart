@@ -9,9 +9,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      title: 'Aplikasi Profil',
       debugShowCheckedModeBanner: false,
-      home: ProfilePage(),
+      home: const ProfilePage(),
     );
   }
 }
@@ -23,34 +24,35 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Profil Pengguna',
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true, 
+        title: const Text('Profil Pengguna'),
+        centerTitle: true,
         backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
       ),
-      body: Center(
-        child: Column(
-          children: const [
-            SizedBox(height: 20),
-            CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.grey,
-              child: Icon(Icons.person, size: 50, color: Colors.white),
-            ),
-            SizedBox(height: 12),
-            Text(
-              'Safrizal Ramadhan',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 4),
-            Text(
-              'Mahasiswa',
-              style: TextStyle(color: Colors.grey),
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          const SizedBox(height: 20),
+          const CircleAvatar(
+            radius: 50,
+            backgroundColor: Colors.grey,
+            child: Icon(Icons.person, size: 50, color: Colors.white),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            'I Ketut Gunawan, S.Kom, M.T.I.',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const Text(
+            'Senior Backend Engineer & Dosen',
+            style: TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+          const SizedBox(height: 10),
+          OutlinedButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.edit, size: 18),
+            label: const Text('Edit Profil'),
+          ),
+        ],
       ),
     );
   }
