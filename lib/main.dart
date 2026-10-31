@@ -12,6 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Aplikasi Profil',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+      ),
       home: const ProfilePage(),
     );
   }
@@ -40,14 +44,14 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
           const ProfileAvatar(),
-          const SizedBox(height: 10),
+          const SizedBox(height: 16),
           const ProfileInfo(
             name: 'Safrizal Ramadhan',
             role: 'Mahasiswa',
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           OutlinedButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.edit, size: 18),
@@ -56,12 +60,20 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 20),
           const ProfileStats(),
           const SizedBox(height: 20),
-          const Text(
-            'Pengalaman Proyek',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'Pengalaman Proyek',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
+          const SizedBox(height: 8),
           Expanded(
             child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: _experiences.length,
               itemBuilder: (context, index) {
                 return ExperienceCard(title: _experiences[index]);
@@ -103,11 +115,13 @@ class ProfileInfo extends StatelessWidget {
       children: [
         Text(
           name,
+          textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
+        const SizedBox(height: 4),
         Text(
           role,
-          style: const TextStyle(fontSize: 14, color: Colors.grey),
+          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
         ),
       ],
     );
@@ -119,12 +133,20 @@ class ProfileStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Expanded(child: StatItem(value: '7', label: 'Proyek')),
-        Expanded(child: StatItem(value: '120', label: 'Followers')),
-        Expanded(child: StatItem(value: '85', label: 'Following')),
-      ],
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        color: Colors.blue.shade50,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Row(
+        children: [
+          Expanded(child: StatItem(value: '7', label: 'Proyek')),
+          Expanded(child: StatItem(value: '120', label: 'Followers')),
+          Expanded(child: StatItem(value: '85', label: 'Following')),
+        ],
+      ),
     );
   }
 }
@@ -151,9 +173,10 @@ class StatItem extends StatelessWidget {
             color: Colors.blue,
           ),
         ),
+        const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(color: Colors.grey),
+          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
         ),
       ],
     );
@@ -168,11 +191,15 @@ class ExperienceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      elevation: 2,
+      margin: const EdgeInsets.only(bottom: 10),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         leading: const Icon(Icons.work, color: Colors.blue),
-        title: Text(title),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        ),
       ),
     );
   }
