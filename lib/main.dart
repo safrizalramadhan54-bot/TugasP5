@@ -40,13 +40,51 @@ class _ProfilePageState extends State<ProfilePage> {
     'Mobile Developer - SmartInvoice (Laravel & Flutter)',
   ];
 
-  void _showNotActiveSnackBar() {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Fitur Edit Profil belum aktif'),
-        duration: Duration(seconds: 2),
-      ),
+  void _showEditDialog() {
+    final controller = TextEditingController(text: userName);
+    final formKey = GlobalKey<FormState>();
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Edit Profil'),
+          content: Form(
+            key: formKey,
+            child: TextFormField(
+              controller: controller,
+              autofocus: true,
+              decoration: const InputDecoration(
+                labelText: 'Nama',
+                border: OutlineInputBorder(),
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Nama tidak boleh kosong';
+                }
+                return null;
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: const Text('Batal'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  setState(() {
+                    userName = controller.text.trim();
+                  });
+                  Navigator.pop(dialogContext);
+                }
+              },
+              child: const Text('Simpan'),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -70,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
-            onPressed: _showNotActiveSnackBar,
+            onPressed: _showEditDialog,
             icon: const Icon(Icons.edit, size: 18),
             label: const Text('Edit Profil'),
           ),
