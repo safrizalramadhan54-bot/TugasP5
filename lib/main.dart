@@ -21,8 +21,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String userName = 'Safrizal Ramadhan';
 
   static const List<String> _experiences = [
     'Developer - GlowBelle Beauty Clinic (Java Swing)',
@@ -33,7 +40,7 @@ class ProfilePage extends StatelessWidget {
     'Mobile Developer - SmartInvoice (Laravel & Flutter)',
   ];
 
-  void _showNotActiveSnackBar(BuildContext context) {
+  void _showNotActiveSnackBar() {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -57,13 +64,13 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 24),
           const ProfileAvatar(),
           const SizedBox(height: 16),
-          const ProfileInfo(
-            name: 'Safrizal Ramadhan',
+          ProfileInfo(
+            name: userName,
             role: 'Mahasiswa',
           ),
           const SizedBox(height: 12),
           OutlinedButton.icon(
-            onPressed: () => _showNotActiveSnackBar(context),
+            onPressed: _showNotActiveSnackBar,
             icon: const Icon(Icons.edit, size: 18),
             label: const Text('Edit Profil'),
           ),
